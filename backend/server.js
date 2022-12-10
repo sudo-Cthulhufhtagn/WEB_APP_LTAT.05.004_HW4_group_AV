@@ -213,3 +213,17 @@ app.delete('/api/posts/:id', async(req, res) => {
         console.error(err.message);
     }
 }); 
+
+// Task 6
+app.delete('/api/delete_all', async(req, res) => {
+    try {
+        //const post = req.body; // we do not need a body for a delete request
+        console.log("delete a post request has arrived");
+        const deletepost = await pool.query(
+            "DELETE FROM posttable"
+        );
+        res.json(deletepost);
+    } catch (err) {
+        console.error(err.message);
+    }
+}); 

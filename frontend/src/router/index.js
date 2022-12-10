@@ -4,7 +4,7 @@ import SignUp from "../views/SignUp.vue";
 import LogIn from "../views/LogIn.vue";
 import auth from "../auth";
 import Post from "../views/Post.vue";
-
+import AddPost from "../views/AddPost.vue";
 
 
 const routes = [{
@@ -29,6 +29,19 @@ const routes = [{
         path: "/api/post/:id",
         name: "Post",
         component: Post,
+        // beforeEnter: async(to, from, next) => {
+        //     let authResult = await auth.authenticated();
+        //     if (!authResult) {
+        //         next('/login')
+        //     } else {
+        //         next();
+        //     }
+        // }
+    },
+    {
+        path: "/api/addpost",
+        name: "AddPost",
+        component: AddPost,
     },
     {
         path: "/login",

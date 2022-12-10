@@ -4,13 +4,20 @@
     <button v-if = "authResult" @click="Logout" class="center">Logout</button>
     </div>
     <div class="post-list" v-for="post in posts"   :key="post.id">  
-      <a class="singlepost" :href="'/api/post/' + post.id">
+      <!-- <a class="singlepost" :href="'/api/post/' + post.id"> -->
+      <a class="singlepost" @click="CheckPost(post.id)">
         <div class="post">
             <h3>  Date:  {{post.date}} </h3>
             <p>  <b> Body: </b> {{post.body}} </p>
         </div>
       </a>
     </div>
+  </div>
+  <div class="container">
+    <button v-if = "authResult" @click="AddPost" class="center">Add post</button>
+  </div>
+  <div class="container">
+    <button v-if = "authResult" @click="DeleteAllPosts" class="center">Delete them all!</button>
   </div>
 </template>
 
@@ -53,6 +60,21 @@ export default {
         .then((response) => response.json())
         .then((data) => (this.posts = data))
         .catch((err) => console.log(err.message));
+    },
+    AddPost() {
+      this.$router.push('/api/addpost');
+    },
+    CheckPost(ID) {
+      this.$router.push('/api/post/'+ID);
+    },
+    DeleteAllPosts() {
+      fetch(`http://localhost:3000/api/delete_all`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" }})
+        .then((response) => response.json())
+        .catch((err) => console.log(err.message));
+      this.$forceUpdate(); // why not?
+      this.fetchPosts();
     },
   }, 
   mounted() {
