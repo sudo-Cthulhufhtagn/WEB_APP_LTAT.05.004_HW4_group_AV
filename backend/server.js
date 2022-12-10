@@ -65,14 +65,48 @@ app.post('/auth/signup', async(req, res) => {
         //console.log(req.body);
         const { email, password } = req.body;
         console.log("a signup request for "+email+" has arrived");
+        var exists = false;
 
         const salt = await bcrypt.genSalt(); //  generates the salt, i.e., a random string
         const bcryptPassword = await bcrypt.hash(password, salt) // hash the password and the salt 
-        const authUser = await pool.query( // insert the user and the hashed password into the database
-            "INSERT INTO users(email, password) values ($1, $2) RETURNING*", [email, bcryptPassword]
-        );
+
+        pool.query(
+            "SELECT * FROM users WHERE email = $1 AND password = $2",
+            [email, bcryptPassword],
+            function (err, res) {
+                if (err) {
+                    console.error("An error occurred:", err.message);
+                    responce.status(500).json({ status: 500, message: "An error occurred: " + err.message });
+                } else {
+                    if (res.length) {
+                        console.log( "User found successfully.");
+                        // responce.status(200).json({ status: 200, message: "User found successfully." });
+                        exists = true;
+                    } else {
+                        console.log( "User not found.");
+                        // responce.status(404).send({ status: 404, message: "User not found." });
+                    }
+                }
+            }
+        )
+
+        console.log(bcryptPassword);
+        if (exists) {
+
+            const authUser = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+            
+            
+        }
+        else {
+            const authUser = await pool.query( // insert the user and the hashed password into the database
+                "INSERT INTO users(email, password) values ($1, $2) RETURNING*", [email, bcryptPassword]
+            );
+        }
         console.log(authUser.rows[0].id);
+
+
         const token = await generateJWT(authUser.rows[0].id); // generates a JWT by taking the user id as an input (payload)
+        
         //console.log(token);
         //res.cookie("isAuthorized", true, { maxAge: 1000 * 60, httpOnly: true });
         //res.cookie('jwt', token, { maxAge: 6000000, httpOnly: true });
