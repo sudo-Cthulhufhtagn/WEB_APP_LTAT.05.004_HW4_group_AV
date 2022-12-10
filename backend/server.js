@@ -95,6 +95,9 @@ app.post('/auth/signup', async(req, res) => {
         if (does_it.rows.length) {
             console.log("Get it");
             authUser = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+            console.log("validPassword:", password, authUser.rows[0].password, bcryptPassword);
+            const validPassword = await bcrypt.compare(password, authUser.rows[0].password);
+            if (!validPassword) return res.status(401).json({ error: "Incorrect password" });
             
             
         }
