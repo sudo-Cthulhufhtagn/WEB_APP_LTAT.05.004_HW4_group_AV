@@ -19,5 +19,6 @@
   background-color: lightgreen;
   padding: 0px;
   margin: 0px;
+  min-height: 100vh;
 }
 </style>
