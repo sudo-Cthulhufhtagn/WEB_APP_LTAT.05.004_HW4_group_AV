@@ -25,9 +25,7 @@ body {
 
 .app_button {
   font-size: 3vh;
-  margin-top: 2vw;
-  margin-left: 2vw;
-  margin-right: 2vw;
+  margin: 2vw;
   background-color: darkgreen;
   color: whitesmoke;
   padding: 1vh;
@@ -65,9 +63,10 @@ body {
   justify-content: center;
   position: fixed;
   right: 1vw; 
-  top: 14vh;
-  width: 15vw;  
+  bottom: 14vh;
+  width: 10vw;  
   margin: 0px;
+  border-radius: 20%;
   background-color: darkgreen;
 }
 
@@ -78,9 +77,19 @@ body {
   padding-top: 1vh;
   padding-bottom: 1vh;
   width: 90%;
-  font-size: 3vh;
+  font-size: 2vh;
   background-color: green;
   color:whitesmoke;
+}
+
+.sticky_menu button:first-of-type {
+  border-top-left-radius: 40%;
+  border-top-right-radius: 40%;
+}
+
+.sticky_menu button:last-of-type {
+  border-bottom-left-radius: 40%;
+  border-bottom-right-radius: 40%;
 }
 
 .sticky_menu button:hover {
@@ -102,6 +111,10 @@ body {
   background-color: whitesmoke;
 }
 
+.post div {
+  display: flex;
+}
+
 .post_title {
   font-size: 3vh;
   padding: 0px;
@@ -110,11 +123,20 @@ body {
   color:darkgreen;
 }
 
+.post_date {
+  font-size: 2vh;
+  padding: 0px;
+  margin: 0px;
+  color: darkgreen;
+  margin-left: auto;
+}
+
 .post_text {
   font-size: 2vh;
   margin: 0px;
   padding: 0px;
   color: green;
+  white-space: pre-wrap;
 }
 
 .feed_container {
@@ -189,16 +211,15 @@ label {
 
 .about {
   position: absolute;
-  left: 40vw;
-  width: 20vw;
+  left: 35vw;
+  width: 30vw;
   background-color:green;
   border: 1vh;
   border-radius: 20%;
   border-color: darkgreen;
-  height: 5vh;
+  height: 8vh;
   padding-top: 5vh;
   padding-bottom: 5vh;
-  width: 20vw;
 }
 .about h1 {
   padding: 0px;
