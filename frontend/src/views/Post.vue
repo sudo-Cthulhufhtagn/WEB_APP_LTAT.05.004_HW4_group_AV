@@ -24,7 +24,10 @@ export default {
     return {
       post: {
         id: "",
-        date: "",
+        date: new Date(),
+        currentYear: this.currentDate.getFullYear(),
+        currentMonth: this.currentDate.getMonth() + 1, 
+        currentDay: this.currentDate.getDate(),
         body: "",
       },
     };

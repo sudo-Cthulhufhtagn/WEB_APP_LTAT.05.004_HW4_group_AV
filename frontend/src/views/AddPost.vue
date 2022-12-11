@@ -19,7 +19,10 @@ export default {
   data() {
     return {
       post: {
-        date: "",
+        date: new Date(),
+        currentYear: this.currentDate.getFullYear(),
+        currentMonth: this.currentDate.getMonth() + 1, // Add 1 because the month is zero-indexed
+        currentDay: this.currentDate.getDate(),
         body: "",
       },
     };
