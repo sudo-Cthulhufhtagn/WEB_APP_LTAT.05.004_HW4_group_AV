@@ -2,8 +2,12 @@
   <div class="app_window">
     <h3 class="app_text" style="font-size:5vh">Add a Post</h3>
     <div>
+      <label for="date">Date: </label>
+      <input name="date" type="text" id="date" required v-model="post.date" readonly class="date_field" />
+    </div>
+    <div>
       <label for="title">Title: </label>
-      <input name="title" type="text" id="title" required v-model="post.date" />
+      <input name="title" type="text" id="title" required v-model="post.title" />
     </div>
     <div>
       <label for="body">Body: </label>
@@ -19,10 +23,8 @@ export default {
   data() {
     return {
       post: {
-        date: new Date(),
-        currentYear: this.currentDate.getFullYear(),
-        currentMonth: this.currentDate.getMonth() + 1, // Add 1 because the month is zero-indexed
-        currentDay: this.currentDate.getDate(),
+        date: ((new Date()).getDate())+"."+((new Date()).getMonth()+1)+"."+((new Date()).getFullYear()),
+        title: "",
         body: "",
       },
     };
@@ -31,6 +33,7 @@ export default {
     addPost() {
       var data = {
         date: this.post.date,
+        title: this.post.title,
         body: this.post.body,
       };
       // using Fetch - post method - send an HTTP post request to the specified URI with the defined body

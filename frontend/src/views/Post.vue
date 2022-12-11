@@ -2,8 +2,12 @@
   <div class="app_window">
     <h3 class="app_text" style="font-size:5vh">A Post</h3>
     <div>
-      <label for="date">Title: </label>
-      <input name="type" type="text" id="date" required v-model="post.date" />
+      <label for="date">Date: </label>
+      <input name="date" type="text" id="date" required v-model="post.date" readonly class="date_field" />
+    </div>
+    <div>
+      <label for="title">Title: </label>
+      <input name="title" type="text" id="title" required v-model="post.title" />
     </div>
     <div>
       <label for="body">Body: </label>
@@ -24,10 +28,8 @@ export default {
     return {
       post: {
         id: "",
-        date: new Date(),
-        currentYear: this.currentDate.getFullYear(),
-        currentMonth: this.currentDate.getMonth() + 1, 
-        currentDay: this.currentDate.getDate(),
+        date: "",
+        title: "",
         body: "",
       },
     };

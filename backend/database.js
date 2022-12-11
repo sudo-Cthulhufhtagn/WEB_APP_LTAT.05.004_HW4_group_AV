@@ -41,6 +41,7 @@ const createTblQuery2 = `
     CREATE TABLE IF NOT EXISTS "posttable" (
 	    "id" SERIAL PRIMARY KEY,         
 	    "date" VARCHAR(200) NOT NULL,
+        "title" VARCHAR(200) NOT NULL,
 	    "body" VARCHAR(200) NOT NULL
     );`;
 

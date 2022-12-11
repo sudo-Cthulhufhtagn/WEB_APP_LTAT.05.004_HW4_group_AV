@@ -1,15 +1,19 @@
 <template>
   <div class="sticky_menu">
+    <div style="height:1vh;"></div>
     <button v-if = "authResult" @click="Logout">Logout</button>
     <button v-if = "authResult" @click="AddPost">Add post</button>
     <button v-if = "authResult" @click="DeleteAllPosts">Delete them all!</button>
     <div style="height:1vh;"></div>
   </div>
-  <div class="post-list" v-for="post in posts"   :key="post.id">  
+  <div class="post-list" v-for="post in posts.reverse()"   :key="post.id">  
       <!-- <a class="singlepost" :href="'/api/post/' + post.id"> -->
     <a class="post_container" @click="CheckPost(post.id)">
       <div class="post">
-          <h3 class="post_title"> {{post.date}} </h3>
+        <div>
+          <h3 class="post_title"> {{post.title}} </h3>
+          <p class="post_date"> {{post.date}} </p>
+        </div>
           <p class="post_text"> {{post.body}} </p>
       </div>
     </a>
